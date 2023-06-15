@@ -2,6 +2,7 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import os
+import pymongo
 
 BASE_PATH = os.path.dirname(__file__)
 
@@ -22,7 +23,7 @@ for p in ps:
 l = l[1:]
 
 quotes = []
-for quote in l:
+for ind, quote in enumerate(l):
     author = quote.find_all('strong')[-1].get_text() \
         .replace('\u2013', '') \
         .replace('\u2014', '') \
@@ -42,9 +43,13 @@ for quote in l:
         .strip()
 
     quotes.append({
+        '_id': ind,
         'quote': q,
         'author': author
     })
 
-with open('API/data/data.json', 'w', encoding='utf-8') as f:
-    json.dump(quotes, f, indent=4)
+myclient = pymongo.MongoClient("mongodb+srv://andreacremonesi42:aZcXk7rafbRFC7FD@inspirational-quotes.c47hsg2.mongodb.net")
+mydb = myclient["Inspirational-Quotes"]
+mycol = mydb["quotes"]
+
+mycol.insert_many(quotes)
