@@ -24,7 +24,7 @@ app.use(cors({
     origin: '*'
 }));
 
-app.get('/api', (req, res) => {
+app.get('/quote', (req, res) => {
     let r = Math.floor(Math.random() * quotes.length);
     let quote = quotes[r];
     res.json(quote);
