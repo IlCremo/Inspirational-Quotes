@@ -30,8 +30,8 @@ app.get('/quote', (req, res) => {
     res.json(quote);
 })
 
-connectDB().then(() => {
-    quotes = quote.find();
+connectDB().then(async () => {
+    quotes = await quote.find();
     console.log(quotes);
 
     app.listen(port, () => {
