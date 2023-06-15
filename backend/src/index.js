@@ -32,6 +32,7 @@ app.get('/quote', (req, res) => {
 
 connectDB().then(() => {
     quotes = quote.find();
+    console.log(quotes);
 
     app.listen(port, () => {
         console.log(`Listening on port ${port}`)
