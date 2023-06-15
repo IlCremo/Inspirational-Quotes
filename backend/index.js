@@ -5,7 +5,7 @@ const cors = require('cors');
 const app = express();
 const port = 5000;
 
-const rawdata = fs.readFileSync('../data/data.json');
+const rawdata = fs.readFileSync('https://github.com/IlCremo/Inspirational-Quotes/blob/main/backend/data/data.json');
 const quotes = JSON.parse(rawdata);
 
 app.use(cors({
