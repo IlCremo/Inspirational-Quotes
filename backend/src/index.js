@@ -8,7 +8,7 @@ const quote = require('./models/quote');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const quotes = [];
+var quotes = [];
 
 const connectDB = async() => {
     try{
@@ -32,7 +32,7 @@ app.get('/api', (req, res) => {
 
 connectDB().then(() => {
     quotes = quote.find();
-    
+
     app.listen(port, () => {
         console.log(`Listening on port ${port}`)
     })
