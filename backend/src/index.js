@@ -2,8 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const model = require('./models/quote');
-const quote = require('./models/quote');
+const quotesDB = require('./models/quote');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -12,8 +11,9 @@ var quotes = [];
 
 const connectDB = async() => {
     try{
-        const conn = await mongoose.connect(process.env.MONGO_URI);
+        const conn = await mongoose.connect(process.env.MONGO_URI, {dbName: 'Inspirational-Quotes'});
         console.log(`MongoDB Connected: ${conn.connection.host}`);
+        return conn;
     } catch(err){
         console.log(err);
         process.exit(1);
@@ -31,7 +31,7 @@ app.get('/quote', (req, res) => {
 })
 
 connectDB().then(async () => {
-    quotes = await quote.find();
+    quotes = await quotesDB.find();
     console.log(quotes);
 
     app.listen(port, () => {

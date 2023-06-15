@@ -4,6 +4,6 @@ const model_schema = new mongoose.Schema({
     _id: Number,
     quote: String,
     author: String
-}, { collection: 'Inspirational-Quotes' });
+}, {collection: 'quotes'});
 
 module.exports = mongoose.model('quote', model_schema);
