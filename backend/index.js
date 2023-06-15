@@ -1,12 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const port = 5000;
-
-const rawdata = fs.readFileSync('https://github.com/IlCremo/Inspirational-Quotes/blob/main/backend/data/data.json');
-const quotes = JSON.parse(rawdata);
+const port = process.env.PORT || 3000;
 
 app.use(cors({
     origin: '*'
@@ -19,5 +17,5 @@ app.get('/api', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Listening on port ${port}`)
 })
